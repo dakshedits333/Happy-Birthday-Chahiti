@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Chahiti! 🤍</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #4A0E17 0%, #2B050B 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --text-color: #FDFBF7;
+            --text-muted: #D1C4C7;
+            --accent-pink: #E8A598;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #1a0205;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Mobile Container Ratio */
+        .mobile-container {
+            width: 100%;
+            max-width: 430px;
+            height: 100vh;
+            max-height: 932px;
+            background: var(--bg-gradient);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Screens & Smooth Transitions */
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: scale(0.95);
+            z-index: 1;
+        }
+
+        .screen.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            background: rgba(43, 5, 11, 0.98);
+            z-index: 100;
+        }
+
+        .pulse-heart {
+            font-size: 4.5rem;
+            animation: pulse 1.5s infinite;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+            100% { transform: scale(1); }
+        }
+
+        .tap-btn {
+            background: var(--accent-pink);
+            color: #2B050B;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 4px 20px rgba(232, 165, 152, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .tap-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Balloon Popping Area */
+        .balloon-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .balloon-wrapper {
+            position: relative;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite alternate;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .balloon-wrapper:nth-child(even) {
+            animation-delay: 0.5s;
+        }
+
+        .balloon-wrapper:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .balloon {
+            width: 65px;
+            height: 65px;
+            background: radial-gradient(circle at 35% 35%, #ffafcc, #ff5c8d);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset -6px -6px 12px rgba(0,0,0,0.2), 0 0 18px rgba(255, 175, 204, 0.6);
+        }
+
+        .balloon-wrapper:nth-child(even) .balloon {
+            background: radial-gradient(circle at 35% 35%, #bde0fe, #4895ef);
+            box-shadow: inset -6px -6px 12px rgba(0,0,0,0.2), 0 0 18px rgba(189, 224, 254, 0.6);
+        }
+
+        .balloon-wrapper:nth-child(3) .balloon {
+            background: radial-gradient(circle at 35% 35%, #ffcb77, #f77f00);
+            box-shadow: inset -6px -6px 12px rgba(0,0,0,0.2), 0 0 18px rgba(255, 203, 119, 0.6);
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background: inherit;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .balloon-thread {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            width: 1px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(-2deg); }
+            100% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        .balloon-wrapper.popped {
+            animation: burstPop 0.3s forwards ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes burstPop {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.8; filter: brightness(1.5); }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Image Reveal Display Box */
+        .image-display {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 320px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            margin-bottom: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .image-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            animation: fadeInImg 0.4s ease;
+        }
+
+        .image-display .placeholder-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @keyframes fadeInImg {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.3s, transform 0.2s;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .action-btn.enabled {
+            opacity: 1;
+            pointer-events: auto;
+            background: var(--accent-pink);
+            color: #2B050B;
+        }
+
+        /* Envelope */
+        .envelope-wrapper {
+            cursor: pointer;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            width: 240px;
+            height: 160px;
+            background: #E8A598;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .envelope p {
+            color: #2B050B;
+            font-weight: 700;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Fullscreen Letter & Memory Wall (Scrollable) */
+        #screen-letter {
+            overflow-y: auto;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .letter-container {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid var(--border-color);
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 380px;
+            text-align: left;
+            backdrop-filter: blur(12px);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .letter-container h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--accent-pink);
+        }
+
+        .letter-container p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin-bottom: 12px;
+            text-align: left;
+            white-space: pre-line;
+        }
+
+        /* 2-Column Portrait Movie Posters Grid */
+        .memory-grid-preview {
+            width: 100%;
+            max-width: 380px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding-bottom: 20px;
+        }
+
+        .film-card {
+            background: #fff;
+            padding: 10px 10px 18px 10px;
+            border-radius: 6px;
+            color: #111;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            transform: rotate(-1.5deg);
+        }
+
+        .film-card:nth-child(even) {
+            transform: rotate(1.5deg);
+        }
+
+        /* Portrait movie poster ratio */
+        .film-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        /* Placeholder style for photo items */
+        .film-img-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #e8dcd6;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Single centered card container for the last item */
+        .single-card-container {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .single-card {
+            background: #fff;
+            padding: 10px 10px 18px 10px;
+            border-radius: 6px;
+            color: #111;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            width: 180px;
+            transform: rotate(1.5deg);
+        }
+
+        .film-caption {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+            color: #222;
+        }
+
+        .film-caption span.sub-note {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #555;
+            margin-top: 3px;
+        }
+
+        /* Footer Note */
+        .footer-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding-bottom: 40px;
+            font-style: italic;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Audio -->
+    <audio id="bgMusic">
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="mobile-container">
+
+        <!-- Splash Screen / Cover -->
+        <div id="splash-screen" class="screen active">
+            <div class="pulse-heart" onclick="startExperience()">💖</div>
+            <h2 style="font-size: 1.8rem; margin-bottom: 10px;">A little something for you, Chahiti</h2>
+            <p>Tap below to start your birthday surprise</p>
+            <button class="tap-btn" onclick="startExperience()">Open Website ✨</button>
+        </div>
+
+        <!-- Section 1: Pop the Balloons (Image Reveals) -->
+        <div id="screen-balloons" class="screen">
+            <h2>Pop the balloons</h2>
+            <p>Pop each balloon to reveal your little reminders! ✨</p>
+            
+            <div class="image-display" id="imageDisplay">
+                <div class="placeholder-text">Tap any balloon above to pop it and reveal a memory...</div>
+            </div>
+
+            <div class="balloon-container" id="balloonContainer">
+                <div class="balloon-wrapper" onclick="popBalloon(0, this)">
+                    <div class="balloon"></div>
+                    <div class="balloon-thread"></div>
+                </div>
+                <div class="balloon-wrapper" onclick="popBalloon(1, this)">
+                    <div class="balloon"></div>
+                    <div class="balloon-thread"></div>
+                </div>
+                <div class="balloon-wrapper" onclick="popBalloon(2, this)">
+                    <div class="balloon"></div>
+                    <div class="balloon-thread"></div>
+                </div>
+                <div class="balloon-wrapper" onclick="popBalloon(3, this)">
+                    <div class="balloon"></div>
+                    <div class="balloon-thread"></div>
+                </div>
+                <div class="balloon-wrapper" onclick="popBalloon(4, this)">
+                    <div class="balloon"></div>
+                    <div class="balloon-thread"></div>
+                </div>
+                <div class="balloon-wrapper" onclick="popBalloon(5, this)">
+                    <div class="balloon"></div>
+                    <div class="balloon-thread"></div>
+                </div>
+            </div>
+
+            <button class="action-btn" id="balloonNextBtn" onclick="goToScreen('screen-envelope')">Continue 🤍</button>
+        </div>
+
+        <!-- Section 2: Envelope Screen -->
+        <div id="screen-envelope" class="screen">
+            <h2>A little note from me to you ✨</h2>
+            <p>Tap to open your letter 💌</p>
+            <div class="envelope-wrapper" onclick="goToScreen('screen-letter')">
+                <div class="envelope">
+                    <p>💌 To Chahiti</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Expanded Letter & Memory Wall -->
+        <div id="screen-letter" class="screen">
+            <div class="letter-container">
+                <h3>Dear Chahiti,</h3>
+                <p>Damnn!!
+It's been 288 dayss!!! ❤️
+The count keeps going on and so does our cute friendship!! 🎀
+Oh 7th of Jan!! You'll always be remembered!! 🌟
+The Kannada paper!! Thank you Delta Kannadiga!! 🙌🏻
+Thank You Kamat Teacher!! 🙏🏻
+Thanks to these amazing people who gave me such a friend likee youuuu!!!!!! ✨
+
+The Ragebait Machine!! 🤬
+The Gossip Producer!! 💅🏻 
+The Tea Spiller!! ☕ 
+The Selfless Therapist!! 🩺
+The Genuine Advicer!! 😎
+The "So Called Playgirl"!! 😁
+And so many different roles that you playy!!! 🤌🏻
+
+I honestly have so muchh more too sayyy but they can't be expressed here!!
+Like seriously howwww cann we gettt so closeee in just such a short period of timeee????
+It all rests upon fatee!! 
+And I am glad for itt!! ✨
+
+For today I wanttt to thank you forr everythingg that you have done for Mee!!
+Let it be the advices you gaveee, the support you showed during my tough times and the friendship you gave mee!! 💝
+
+And one last thing I wanna say is that, I'll always be there for you too, let it be giving you delusional hopes and supporting your fake scenarios or let it be suggesting you menu options 😂
+No matter what, This Antaryami is always with you, even if there is no one else!!
+
+Lastly and foremostly!!
+Wishhh youuu the besttt birthday everrr Chahitiiii!!!!!!! 💗</p>
+                <p style="text-align: right; font-weight: 700; margin-bottom: 0; line-height: 1.5;">your dear best friend<br>Daksh</p>
+            </div>
+
+            <p style="font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px;">A Walk Down Memory Lane</p>
+            
+            <!-- 2-Column Portrait Movie Posters Grid -->
+            <div class="memory-grid-preview">
+                <!-- 1 -->
+                <div class="film-card">
+                    <img src="photo1.jpg" class="film-img" alt="Memory 1">
+                    <div class="film-caption">Shubman Bhai!!! 😁</div>
+                </div>
+                <!-- 2 -->
+                <div class="film-card">
+                    <img src="photo2.jpg" class="film-img" alt="Memory 2">
+                    <div class="film-caption">Biceps Huh!!? 😁</div>
+                </div>
+                <!-- 3 -->
+                <div class="film-card">
+                    <img src="photo3.jpg" class="film-img" alt="Memory 3">
+                    <div class="film-caption">ZNMD ✨</div>
+                </div>
+                <!-- 4 -->
+                <div class="film-card">
+                    <img src="photo4.jpg" class="film-img" alt="Memory 4">
+                    <div class="film-caption">YJHD ✨</div>
+                </div>
+                <!-- 5 -->
+                <div class="film-card">
+                    <img src="photo5.jpg" class="film-img" alt="Memory 5">
+                    <div class="film-caption">Buri Khabar?? Ya Fav Actor? 😁</div>
+                </div>
+                <!-- 6 -->
+                <div class="film-card">
+                    <img src="photo6.jpg" class="film-img" alt="Memory 6">
+                    <div class="film-caption">Boulevard ✨</div>
+                </div>
+                <!-- 7 -->
+                <div class="film-card">
+                    <img src="photo7.jpg" class="film-img" alt="Memory 7">
+                    <div class="film-caption">Off Campus ✨</div>
+                </div>
+                <!-- 8 -->
+                <div class="film-card">
+                    <img src="photo8.jpg" class="film-img" alt="Memory 8">
+                    <div class="film-caption">The Last Sunrise ✨</div>
+                </div>
+                <!-- 9 -->
+                <div class="film-card">
+                    <img src="photo9.jpg" class="film-img" alt="Memory 9">
+                    <div class="film-caption">The OG!! 🔥🔥</div>
+                </div>
+                <!-- 10 -->
+                <div class="film-card">
+                    <img src="photo10.jpg" class="film-img" alt="Memory 10">
+                    <div class="film-caption">The first one you told me!!!! 🤍</div>
+                </div>
+                <!-- 11 -->
+                <div class="film-card">
+                    <img src="photo11.jpg" class="film-img" alt="Memory 11">
+                    <div class="film-caption">So many attempts!!! 😭</div>
+                </div>
+                <!-- 12 (Love Ka The End) -->
+                <div class="film-card">
+                    <img src="photo12.jpg" class="film-img" alt="Memory 12">
+                    <div class="film-caption">You made me watch this!! 😭</div>
+                </div>
+            </div>
+
+            <!-- "How can I forget him???" card (Second to last) -->
+            <div class="single-card-container">
+                <div class="single-card">
+                    <img src="photo13.jpg" class="film-img" alt="Memory 13">
+                    <div class="film-caption">How can I forget him??? 😁</div>
+                </div>
+            </div>
+
+            <!-- "Our photo?" card (Absolute Last) -->
+            <div class="single-card-container">
+                <div class="single-card">
+                    <div class="film-img-placeholder">?</div>
+                    <div class="film-caption">
+                        Our photo?
+                        <span class="sub-note">Please let's meet soon.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Note -->
+            <div class="footer-note">
+                BTW, did you notice the background music and color?
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Control & Smooth Transitions -->
+    <script>
+        const reminderImages = [
+            "reminder1.jpg",
+            "reminder2.jpg",
+            "reminder3.jpg",
+            "reminder4.jpg",
+            "reminder5.jpg",
+            "reminder6.jpg"
+        ];
+
+        let poppedCount = 0;
+
+        function startExperience() {
+            var music = document.getElementById('bgMusic');
+            
+            // Start song at exactly 2 minutes 18 seconds (138 seconds)
+            music.currentTime = 138;
+
+            // Seamlessly loop back to 2:18 when the song reaches the end
+            music.addEventListener('ended', function() {
+                this.currentTime = 138;
+                this.play();
+            });
+
+            try {
+                music.play().catch(function(e) {
+                    console.log("Audio play blocked or file missing.");
+                });
+            } catch (err) {
+                console.log("Audio error handled.");
+            }
+            
+            let splash = document.getElementById('splash-screen');
+            splash.style.opacity = '0';
+            splash.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                splash.classList.remove('active');
+                document.getElementById('screen-balloons').classList.add('active');
+            }, 300);
+        }
+
+        function goToScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function popBalloon(index, element) {
+            if (element.classList.contains('popped')) return;
+            
+            element.classList.add('popped');
+            
+            const displayBox = document.getElementById('imageDisplay');
+            displayBox.innerHTML = `<img src="${reminderImages[index]}" alt="Reminder Note">`;
+            
+            poppedCount++;
+            if (poppedCount === 6) {
+                document.getElementById('balloonNextBtn').classList.add('enabled');
+            }
+        }
+    </script>
+</body>
+</html>
