@@ -335,6 +335,32 @@
             white-space: pre-line;
         }
 
+        /* Single Centered Tilted Cards (for pre-memory lane & final cards) */
+        .single-card-container {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .single-card {
+            background: #fff;
+            padding: 12px 12px 20px 12px;
+            border-radius: 6px;
+            color: #111;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 220px;
+        }
+
+        .single-card.tilt-left {
+            transform: rotate(-2.5deg);
+        }
+
+        .single-card.tilt-right {
+            transform: rotate(2.5deg);
+        }
+
         /* 2-Column Portrait Movie Posters Grid */
         .memory-grid-preview {
             width: 100%;
@@ -380,25 +406,6 @@
             color: #777;
             font-size: 1.5rem;
             font-weight: 700;
-        }
-
-        /* Single centered card container for the last item */
-        .single-card-container {
-            width: 100%;
-            max-width: 380px;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .single-card {
-            background: #fff;
-            padding: 10px 10px 18px 10px;
-            border-radius: 6px;
-            color: #111;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            width: 180px;
-            transform: rotate(1.5deg);
         }
 
         .film-caption {
@@ -535,81 +542,116 @@ Wishhh youuu the besttt birthday everrr Chahitiiii!!!!!!! 💗</p>
 
             <p style="font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px;">A Walk Down Memory Lane</p>
             
-            <!-- 2-Column Portrait Movie Posters Grid -->
+            <!-- 1. Birthday Girl Photo (Tilted Left, Centered Separately) -->
+            <div class="single-card-container">
+                <div class="single-card tilt-left">
+                    <img src="photo20.jpg" class="film-img" alt="Birthday Girl">
+                    <div class="film-caption">Birthday Girl ✨</div>
+                </div>
+            </div>
+
+            <!-- 2. Tuition Photo (Tilted Right, Centered Separately) -->
+            <div class="single-card-container">
+                <div class="single-card tilt-right">
+                    <img src="photo21.jpg" class="film-img" alt="Tuition Days">
+                    <div class="film-caption">Tuition Days 🏫</div>
+                </div>
+            </div>
+
+            <!-- 3. Question Paper Photo (Straight, Centered Separately) -->
+            <div class="single-card-container">
+                <div class="single-card">
+                    <img src="photo22.jpg" class="film-img" alt="Question Paper">
+                    <div class="film-caption">The Question Paper 📝</div>
+                </div>
+            </div>
+
+            <!-- Main Memory Lane Grid (Original + 5 Additions) -->
             <div class="memory-grid-preview">
-                <!-- 1 -->
+                <!-- Original 12 Posters (photo1 to photo12) -->
                 <div class="film-card">
                     <img src="photo1.jpg" class="film-img" alt="Memory 1">
                     <div class="film-caption">Shubman Bhai!!! 😁</div>
                 </div>
-                <!-- 2 -->
                 <div class="film-card">
                     <img src="photo2.jpg" class="film-img" alt="Memory 2">
                     <div class="film-caption">Biceps Huh!!? 😁</div>
                 </div>
-                <!-- 3 -->
                 <div class="film-card">
                     <img src="photo3.jpg" class="film-img" alt="Memory 3">
                     <div class="film-caption">ZNMD ✨</div>
                 </div>
-                <!-- 4 -->
                 <div class="film-card">
                     <img src="photo4.jpg" class="film-img" alt="Memory 4">
                     <div class="film-caption">YJHD ✨</div>
                 </div>
-                <!-- 5 -->
                 <div class="film-card">
                     <img src="photo5.jpg" class="film-img" alt="Memory 5">
                     <div class="film-caption">Buri Khabar?? Ya Fav Actor? 😁</div>
                 </div>
-                <!-- 6 -->
                 <div class="film-card">
                     <img src="photo6.jpg" class="film-img" alt="Memory 6">
                     <div class="film-caption">Boulevard ✨</div>
                 </div>
-                <!-- 7 -->
                 <div class="film-card">
                     <img src="photo7.jpg" class="film-img" alt="Memory 7">
                     <div class="film-caption">Off Campus ✨</div>
                 </div>
-                <!-- 8 -->
                 <div class="film-card">
                     <img src="photo8.jpg" class="film-img" alt="Memory 8">
                     <div class="film-caption">The Last Sunrise ✨</div>
                 </div>
-                <!-- 9 -->
                 <div class="film-card">
                     <img src="photo9.jpg" class="film-img" alt="Memory 9">
                     <div class="film-caption">The OG!! 🔥🔥</div>
                 </div>
-                <!-- 10 -->
                 <div class="film-card">
                     <img src="photo10.jpg" class="film-img" alt="Memory 10">
                     <div class="film-caption">The first one you told me!!!! 🤍</div>
                 </div>
-                <!-- 11 -->
                 <div class="film-card">
                     <img src="photo11.jpg" class="film-img" alt="Memory 11">
                     <div class="film-caption">So many attempts!!! 😭</div>
                 </div>
-                <!-- 12 (Love Ka The End) -->
                 <div class="film-card">
                     <img src="photo12.jpg" class="film-img" alt="Memory 12">
                     <div class="film-caption">You made me watch this!! 😭</div>
                 </div>
+
+                <!-- 5 New Additions (photo13 to photo17) -->
+                <div class="film-card">
+                    <img src="photo13.jpg" class="film-img" alt="Shinchan">
+                    <div class="film-caption">your favorite, right??</div>
+                </div>
+                <div class="film-card">
+                    <img src="photo14.jpg" class="film-img" alt="Hindi Horror">
+                    <div class="film-caption">you loved these!!</div>
+                </div>
+                <div class="film-card">
+                    <img src="photo15.jpg" class="film-img" alt="Yogesh and Akansha">
+                    <div class="film-caption">your favorite couple!!</div>
+                </div>
+                <div class="film-card">
+                    <img src="photo16.jpg" class="film-img" alt="Shaadi Ke Side Effects">
+                    <div class="film-caption">...</div>
+                </div>
+                <div class="film-card">
+                    <img src="photo17.jpg" class="film-img" alt="Nails">
+                    <div class="film-caption">"wow!!" 😱</div>
+                </div>
             </div>
 
-            <!-- "How can I forget him???" card (Second to last) -->
+            <!-- "How can I forget him???" card (Second to Last, Centered Separately) -->
             <div class="single-card-container">
-                <div class="single-card">
-                    <img src="photo13.jpg" class="film-img" alt="Memory 13">
+                <div class="single-card tilt-right">
+                    <img src="photo18.jpg" class="film-img" alt="How can I forget him">
                     <div class="film-caption">How can I forget him??? 😁</div>
                 </div>
             </div>
 
-            <!-- "Our photo?" card (Absolute Last) -->
+            <!-- "Our photo?" card (Absolute Last, Centered Separately) -->
             <div class="single-card-container">
-                <div class="single-card">
+                <div class="single-card tilt-left">
                     <div class="film-img-placeholder">?</div>
                     <div class="film-caption">
                         Our photo?
@@ -642,12 +684,12 @@ Wishhh youuu the besttt birthday everrr Chahitiiii!!!!!!! 💗</p>
         function startExperience() {
             var music = document.getElementById('bgMusic');
             
-            // Start song at exactly 2 minutes 18 seconds (138 seconds)
-            music.currentTime = 138;
+            // Start song at exactly 2 minutes (120 seconds)
+            music.currentTime = 120;
 
-            // Seamlessly loop back to 2:18 when the song reaches the end
+            // Seamlessly loop back to 2:00 when the song reaches the end
             music.addEventListener('ended', function() {
-                this.currentTime = 138;
+                this.currentTime = 120;
                 this.play();
             });
 
